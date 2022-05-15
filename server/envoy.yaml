@@ -47,7 +47,7 @@ static_resources:
   clusters:
     - name: greeter_service
       connect_timeout: 0.25s
-      type: logical_dns
+      type: STRICT_DNS
       http2_protocol_options: {}
       lb_policy: round_robin
       # win/mac hosts: Use address: host.docker.internal instead of address: localhost in the line below
@@ -58,5 +58,5 @@ static_resources:
             - endpoint:
                 address:
                   socket_address:
-                    address: 0.0.0.0
+                    address: grpc
                     port_value: 9090

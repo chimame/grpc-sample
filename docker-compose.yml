@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  envoy:
+    build:
+      context: ./server
+      dockerfile: envoy.Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - grpc
+  grpc:
+    build:
+      context: ./server
+      dockerfile: grpc.Dockerfile
+    volumes:
+      - ./server/server.js:/app/server.js

@@ -75,13 +75,12 @@ function getServer() {
   return server;
 }
 
-if (require.main === module) {
-  var server = getServer();
-  server.bindAsync(
-    '0.0.0.0:9090', grpc.ServerCredentials.createInsecure(), (err, port) => {
-      assert.ifError(err);
-      server.start();
-  });
-}
-
-exports.getServer = getServer;
+var server = getServer();
+server.bindAsync(
+  '0.0.0.0:9090',
+  grpc.ServerCredentials.createInsecure(),
+  (err, port) => {
+    console.log(`listen: ${port}`);
+    assert.ifError(err);
+    server.start();
+});
