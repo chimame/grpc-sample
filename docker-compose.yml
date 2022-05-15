@@ -14,3 +14,15 @@ services:
       dockerfile: grpc.Dockerfile
     volumes:
       - ./server/server.js:/app/server.js
+  front:
+    build:
+      context: ./front
+    entrypoint: ./scripts/docker-entrypoint.sh
+    command: npm run dev
+    ports:
+      - 3000:3000
+    volumes:
+      - ./front:/app/
+      - ./server/helloworld.proto:/server/helloworld.proto
+    depends_on:
+      - envoy
